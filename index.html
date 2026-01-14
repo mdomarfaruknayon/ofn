@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar Faruk Nayon | Film Director & Visual Storyteller</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #0a0a0a;
+            --accent-gold: #ffd700;
+            --accent-gold-light: #fff4b3;
+            --accent-red: #c41e3a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --transition-slow: 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --transition-medium: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --section-spacing: 120px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .logo, .section-title {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-padding {
+            padding: var(--section-spacing) 0;
+        }
+
+        .gold-text {
+            color: var(--accent-gold);
+        }
+
+        .red-text {
+            color: var(--accent-red);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: var(--transition-medium);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: var(--transition-medium);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--primary-dark);
+            background-color: var(--accent-gold);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        .loader-content {
+            text-align: center;
+            position: relative;
+        }
+
+        .film-strip {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            margin: 0 auto 40px;
+            overflow: hidden;
+        }
+
+        .film-frame {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            opacity: 0;
+            animation: filmReveal 2.5s ease-in-out infinite;
+        }
+
+        .film-frame:nth-child(1) { top: 20px; left: 20px; animation-delay: 0s; }
+        .film-frame:nth-child(2) { top: 20px; left: 120px; animation-delay: 0.3s; }
+        .film-frame:nth-child(3) { top: 20px; right: 20px; animation-delay: 0.6s; }
+        .film-frame:nth-child(4) { top: 80px; left: 20px; animation-delay: 0.9s; }
+        .film-frame:nth-child(5) { top: 80px; left: 120px; animation-delay: 1.2s; }
+        .film-frame:nth-child(6) { top: 80px; right: 20px; animation-delay: 1.5s; }
+        .film-frame:nth-child(7) { bottom: 20px; left: 20px; animation-delay: 1.8s; }
+        .film-frame:nth-child(8) { bottom: 20px; left: 120px; animation-delay: 2.1s; }
+        .film-frame:nth-child(9) { bottom: 20px; right: 20px; animation-delay: 2.4s; }
+
+        @keyframes filmReveal {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .loader-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-top: 30px;
+            opacity: 0;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { opacity: 0.3; text-shadow: 0 0 5px var(--accent-gold); }
+            100% { opacity: 1; text-shadow: 0 0 20px var(--accent-gold), 0 0 30px var(--accent-red); }
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 0;
+            z-index: 1000;
+            transition: var(--transition-medium);
+        }
+
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo span {
+            color: var(--text-primary);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-red);
+            transition: var(--transition-medium);
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 50px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-gold);
+            transition: var(--transition-medium);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        /* ===== HERO SECTION ===== */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), 
+                        url('https://images.unsplash.com/photo-1489599809516-9827b6d1cf13?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            z-index: -1;
+            animation: heroPan 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes heroPan {
+            0% { transform: scale(1) translateX(0); }
+            100% { transform: scale(1.05) translateX(-20px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: titleReveal 1.5s forwards 0.5s;
+            line-height: 1.1;
+        }
+
+        @keyframes titleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: subtitleReveal 1.5s forwards 1s;
+        }
+
+        @keyframes subtitleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: taglineReveal 1.5s forwards 1.5s;
+            max-width: 600px;
+            color: var(--text-secondary);
+        }
+
+        @keyframes taglineReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: ctaReveal 1.5s forwards 2s;
+        }
+
+        @keyframes ctaReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        #about {
+            background-color: var(--secondary-dark);
+            position: relative;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(196, 30, 58, 0.1));
+            z-index: 1;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: var(--accent-gold);
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+        }
+
+        .education {
+            margin-top: 30px;
+            padding: 25px;
+            border-left: 4px solid var(--accent-gold);
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.05), transparent);
+        }
+
+        /* ===== PROFESSIONAL SKILLS SECTION ===== */
+        #professional-skills {
+            background-color: var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-category {
+            margin-bottom: 60px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent-gold);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(196, 30, 58, 0.05));
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+            transition: var(--transition-medium);
+        }
+
+        .skill-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(196, 30, 58, 0.1));
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-right: 20px;
+            width: 60px;
+            text-align: center;
+        }
+
+        .skill-content {
+            flex: 1;
+        }
+
+        .skill-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .skill-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== EXPERIENCE & WORK SECTION ===== */
+        #experience-work {
+            background-color: var(--secondary-dark);
+            position: relative;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .experience-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent);
+            opacity: 0;
+            transition: var(--transition-medium);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .experience-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-icon {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-gold-light);
+        }
+
+        .experience-period {
+            color: var(--accent-red);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .experience-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .experience-projects {
+            margin-top: 20px;
+        }
+
+        .project-item {
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent-gold);
+            transition: var(--transition-fast);
+        }
+
+        .project-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* ===== SOFTWARE & TOOLS SECTION ===== */
+        #software-tools {
+            background-color: var(--primary-dark);
+        }
+
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(196, 30, 58, 0.05));
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-red));
+            transform: scaleX(0);
+            transition: var(--transition-medium);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .tool-icon {
+            font-size: 4rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .tool-category {
+            color: var(--accent-red);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== PHILOSOPHY SECTION ===== */
+        #philosophy {
+            background-color: var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .philosophy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .philosophy-quote {
+            font-size: 2.5rem;
+            font-style: italic;
+            margin-bottom: 50px;
+            line-height: 1.4;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .philosophy-quote::before, .philosophy-quote::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-gold);
+            position: absolute;
+            opacity: 0.5;
+        }
+
+        .philosophy-quote::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .philosophy-quote::after {
+            bottom: -40px;
+            right: 0;
+        }
+
+        .philosophy-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        #contact {
+            background-color: var(--primary-dark);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .contact-details {
+            margin-bottom: 50px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            opacity: 0;
+            transition: var(--transition-medium);
+            z-index: -1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            color: var(--primary-dark);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--secondary-dark);
+            padding: 80px 0 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== ANIMATION CLASSES ===== */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .about-container {
+                gap: 60px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                height: 500px;
+                order: 2;
+            }
+            
+            .about-text {
+                order: 1;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-padding {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition-medium);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .philosophy-quote {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 30px;
+            }
+            
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .skills-container, .tools-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .philosophy-quote {
+                font-size: 1.6rem;
+            }
+            
+            .experience-card, .tool-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="film-strip">
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+                <div class="film-frame"></div>
+            </div>
+            <div class="loader-text">OMAR FARUK NAYON</div>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#hero" class="logo">OF<span>N</span></a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#professional-skills">Skills</a></li>
+                <li><a href="#experience-work">Experience</a></li>
+                <li><a href="#software-tools">Tools</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Omar Faruk <span class="gold-text">Nayon</span></h1>
+                <h2 class="hero-subtitle">Director & Visual Storyteller</h2>
+                <p class="hero-tagline">Crafting compelling narratives through cinematic vision and creative direction. Transforming ideas into visual experiences that resonate and inspire.</p>
+                <a href="#contact" class="btn hero-cta">Start a Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">About <span class="gold-text">Me</span></h2>
+            <div class="about-container">
+                <div class="about-image reveal-on-scroll">
+                    <div class="image-overlay"></div>
+                    <div class="image-placeholder">
+                        <i class="fas fa-film"></i>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2 class="reveal-on-scroll">Cinematic Visionary & Story Director</h2>
+                    <p class="reveal-on-scroll">I am a passionate film and media professional with hands-on experience in creative direction, assistant direction, and content production. My journey in visual storytelling is driven by a deep commitment to crafting narratives that not only entertain but also resonate on an emotional level.</p>
+                    <p class="reveal-on-scroll">Through collaborations with production houses, media platforms, and creative agencies, I've contributed to web films, digital content, and branded media projects that connect with diverse audiences. Each project is an opportunity to explore new creative dimensions and push the boundaries of visual storytelling.</p>
+                    <div class="education reveal-on-scroll">
+                        <p><strong>Education:</strong> Film and Media Studies (BA), Stamford University Bangladesh</p>
+                        <p><strong>Location:</strong> Dhaka, Bangladesh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Skills Section -->
+    <section id="professional-skills" class="section-padding">
+        <div class="skills-bg"></div>
+        <div class="container">
+            <h2 class="section-title center reveal-on-scroll">Professional <span class="gold-text">Skills</span></h2>
+            <div class="skills-container">
+                <!-- Creative Skills -->
+                <div class="skill-category reveal-on-scroll">
+                    <h3>Creative & Direction</h3>
+                    <div class="skill-item stagger-delay-1">
+                        <div class="skill-icon">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Script Writing</div>
+                            <div class="skill-description">Crafting compelling narratives with strong character development and plot structure</div>
+                        </div>
+                    </div>
+                    <div class="skill-item stagger-delay-2">
+                        <div class="skill-icon">
+                            <i class="fas fa-theater-masks"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Direction</div>
+                            <div class="skill-description">Guiding creative vision from pre-production through final delivery</div>
+                        </div>
+                    </div>
+                    <div class="skill-item stagger-delay-3">
+                        <div class="skill-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Creative Planning</div>
+                            <div class="skill-description">Developing comprehensive creative strategies and production plans</div>
+                        </div>
+                    </div>
+                    <div class="skill-item stagger-delay-4">
+                        <div class="skill-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Visual Storytelling</div>
+                            <div class="skill-description">Communicating narratives through compelling visual composition</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Skills -->
+                <div class="skill-category reveal-on-scroll">
+                    <h3>Technical Expertise</h3>
+                    <div class="skill-item stagger-delay-1">
+                        <div class="skill-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Videography</div>
+                            <div class="skill-description">Expert camera operation, lighting, and composition techniques</div>
+                        </div>
+                    </div>
+                    <div class="skill-item stagger-delay-2">
+                        <div class="skill-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Photography</div>
+                            <div class="skill-description">Capturing powerful still images with artistic composition</div>
+                        </div>
+                    </div>
+                    <div class="skill-item stagger-delay-3">
+                        <div class="skill-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Video Editing</div>
+                            <div class="skill-description">Post-production editing, color grading, and visual effects</div>
+                        </div>
+                    </div>
+                    <div class="skill-item stagger-delay-4">
+                        <div class="skill-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-name">Sound Design</div>
+                            <div class="skill-description">Audio mixing, foley, and sound effect creation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Work Section -->
+    <section id="experience-work" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Experience & <span class="gold-text">Work</span></h2>
+            <div class="experience-grid">
+                <div class="experience-card reveal-on-scroll">
+                    <div class="experience-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="experience-period">2022 - Present</div>
+                    <h3 class="experience-title">Creative Director & Assistant Director</h3>
+                    <p class="experience-description">Leading creative direction for web films and digital content projects with major production houses and media platforms.</p>
+                    <div class="experience-projects">
+                        <div class="project-item">
+                            <strong>Production House Collaborations:</strong> Worked with 5+ production houses
+                        </div>
+                        <div class="project-item">
+                            <strong>Media Platforms:</strong> Content creation for streaming services
+                        </div>
+                        <div class="project-item">
+                            <strong>Branded Projects:</strong> Direction for commercial media campaigns
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-card reveal-on-scroll stagger-delay-1">
+                    <div class="experience-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="experience-period">2020 - 2022</div>
+                    <h3 class="experience-title">Content Producer & Media Specialist</h3>
+                    <p class="experience-description">Produced digital content for various media platforms and creative agencies, managing end-to-end production workflows.</p>
+                    <div class="experience-projects">
+                        <div class="project-item">
+                            <strong>Web Films:</strong> Produced 15+ short films and web series
+                        </div>
+                        <div class="project-item">
+                            <strong>Digital Content:</strong> Created engaging content for social platforms
+                        </div>
+                        <div class="project-item">
+                            <strong>Agency Work:</strong> Collaborated with 3+ creative agencies
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-card reveal-on-scroll stagger-delay-2">
+                    <div class="experience-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="experience-period">2018 - 2020</div>
+                    <h3 class="experience-title">Assistant Director & Production Coordinator</h3>
+                    <p class="experience-description">Supported production teams on independent film projects and managed pre-production logistics and planning.</p>
+                    <div class="experience-projects">
+                        <div class="project-item">
+                            <strong>Film Projects:</strong> Assisted in 8+ independent film productions
+                        </div>
+                        <div class="project-item">
+                            <strong>Pre-production:</strong> Script development and storyboarding
+                        </div>
+                        <div class="project-item">
+                            <strong>Coordination:</strong> Location scouting and talent management
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software & Tools Section -->
+    <section id="software-tools" class="section-padding">
+        <div class="container">
+            <h2 class="section-title center reveal-on-scroll">Software & <span class="gold-text">Tools</span></h2>
+            <div class="tools-container">
+                <!-- Video Editing Tools -->
+                <div class="tool-card reveal-on-scroll">
+                    <div class="tool-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="tool-category">Video Editing</div>
+                    <div class="tool-name">Adobe Premiere Pro</div>
+                    <div class="tool-description">Professional video editing software for cinematic projects</div>
+                </div>
+                
+                <div class="tool-card reveal-on-scroll stagger-delay-1">
+                    <div class="tool-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <div class="tool-category">Video Editing</div>
+                    <div class="tool-name">Final Cut Pro</div>
+                    <div class="tool-description">Advanced editing for Mac-based production workflows</div>
+                </div>
+                
+                <div class="tool-card reveal-on-scroll stagger-delay-2">
+                    <div class="tool-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <div class="tool-category">Color Grading</div>
+                    <div class="tool-name">DaVinci Resolve</div>
+                    <div class="tool-description">Professional color correction and grading software</div>
+                </div>
+                
+                <!-- Visual Effects Tools -->
+                <div class="tool-card reveal-on-scroll stagger-delay-3">
+                    <div class="tool-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="tool-category">Visual Effects</div>
+                    <div class="tool-name">Adobe After Effects</div>
+                    <div class="tool-description">Motion graphics and visual effects creation</div>
+                </div>
+                
+                <!-- Sound Design Tools -->
+                <div class="tool-card reveal-on-scroll">
+                    <div class="tool-icon">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <div class="tool-category">Sound Design</div>
+                    <div class="tool-name">Adobe Audition</div>
+                    <div class="tool-description">Professional audio editing and mixing software</div>
+                </div>
+                
+                <div class="tool-card reveal-on-scroll stagger-delay-1">
+                    <div class="tool-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="tool-category">Sound Design</div>
+                    <div class="tool-name">Pro Tools</div>
+                    <div class="tool-description">Industry-standard digital audio workstation</div>
+                </div>
+                
+                <!-- Production Tools -->
+                <div class="tool-card reveal-on-scroll stagger-delay-2">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="tool-category">Production</div>
+                    <div class="tool-name">Microsoft Office Suite</div>
+                    <div class="tool-description">Word, PowerPoint for scripting and presentations</div>
+                </div>
+                
+                <div class="tool-card reveal-on-scroll stagger-delay-3">
+                    <div class="tool-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div class="tool-category">Pre-production</div>
+                    <div class="tool-name">Storyboard Software</div>
+                    <div class="tool-description">Visual planning and storyboard creation tools</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="section-padding">
+        <div class="philosophy-bg"></div>
+        <div class="container">
+            <div class="philosophy-content">
+                <h2 class="section-title center reveal-on-scroll">Creative <span class="gold-text">Philosophy</span></h2>
+                <p class="philosophy-quote reveal-on-scroll">"True cinematic art emerges when technical mastery converges with emotional authenticity—every frame a deliberate choice, every scene a narrative heartbeat."</p>
+                <p class="philosophy-text reveal-on-scroll">My approach to filmmaking is rooted in the belief that visual storytelling should transcend mere observation to become an immersive experience. I focus on creating work that balances aesthetic precision with emotional depth, ensuring each project carries a distinct visual signature while maintaining authentic human connection at its core. Every project is an opportunity to explore the intersection of technology and humanity, creating stories that resonate long after the credits roll.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Get In <span class="gold-text">Touch</span></h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="reveal-on-scroll">Let's Create Something <span class="gold-text">Remarkable</span></h2>
+                    <div class="contact-details">
+                        <div class="contact-item reveal-on-scroll">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>mdomarfaruknayon@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item reveal-on-scroll stagger-delay-1">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+8801705919099</p>
+                            </div>
+                        </div>
+                        <div class="contact-item reveal-on-scroll stagger-delay-2">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Location</h4>
+                                <p>Dhaka, Bangladesh</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/omarfaruknayonfb" class="social-link reveal-on-scroll" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/omarfaruknayon" class="social-link reveal-on-scroll stagger-delay-1" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/omarfaruknayon" class="social-link reveal-on-scroll stagger-delay-2" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.x.com/omarfaruknayon" class="social-link reveal-on-scroll stagger-delay-3" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form reveal-on-scroll">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Omar Faruk Nayon</div>
+            <p class="footer-tagline">Director & Visual Storyteller | Crafting Cinematic Experiences That Resonate</p>
+            <div class="copyright">
+                &copy; 2023 Omar Faruk Nayon. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== DATA CONFIGURATION =====
+        const skillsData = [
+            { name: "Script Writing", icon: "fas fa-pen-nib", level: 95 },
+            { name: "Videography", icon: "fas fa-video", level: 90 },
+            { name: "Photography", icon: "fas fa-camera", level: 85 },
+            { name: "Video Editing", icon: "fas fa-film", level: 92 },
+            { name: "Sound Design", icon: "fas fa-volume-up", level: 80 },
+            { name: "Direction", icon: "fas fa-theater-masks", level: 94 },
+            { name: "Creative Planning", icon: "fas fa-lightbulb", level: 88 },
+            { name: "Visual Storytelling", icon: "fas fa-eye", level: 96 }
+        ];
+
+        const experienceData = [
+            { 
+                date: "2022 - Present", 
+                title: "Creative Director & Assistant Director", 
+                description: [
+                    "Led creative direction for multiple web film projects",
+                    "Assisted in directing productions for major media platforms",
+                    "Developed visual storytelling strategies for branded content",
+                    "Collaborated with production houses on cinematic projects"
+                ]
+            },
+            { 
+                date: "2020 - 2022", 
+                title: "Content Producer & Media Specialist", 
+                description: [
+                    "Produced digital content for streaming platforms",
+                    "Managed end-to-end production workflows for media projects",
+                    "Coordinated with creative agencies on commercial productions",
+                    "Supervised post-production processes"
+                ]
+            },
+            { 
+                date: "2018 - 2020", 
+                title: "Film Production Assistant", 
+                description: [
+                    "Supported production teams on independent film projects",
+                    "Assisted with script development and storyboarding",
+                    "Managed pre-production logistics and planning",
+                    "Coordinated location scouting and talent management"
+                ]
+            }
+        ];
+
+        const toolsData = [
+            { name: "Adobe Premiere Pro", icon: "fas fa-film" },
+            { name: "Final Cut Pro", icon: "fas fa-cut" },
+            { name: "DaVinci Resolve", icon: "fas fa-sliders-h" },
+            { name: "Adobe After Effects", icon: "fas fa-magic" },
+            { name: "Adobe Audition", icon: "fas fa-wave-square" },
+            { name: "Pro Tools", icon: "fas fa-music" },
+            { name: "Microsoft Office Suite", icon: "fas fa-file-alt" },
+            { name: "Storyboard Software", icon: "fas fa-th-large" }
+        ];
+
+        // ===== DOM ELEMENTS =====
+        const preloader = document.getElementById('preloader');
+        const header = document.querySelector('header');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const contactForm = document.getElementById('contactForm');
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+        // ===== PRELOADER =====
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 2500);
+        });
+
+        // ===== HEADER SCROLL EFFECT =====
+        window.addEventListener('scroll', function() {
+            // Header background on scroll
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Reveal on scroll animation
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+
+        // ===== MOBILE MENU TOGGLE =====
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // ===== SMOOTH SCROLLING FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== CONTACT FORM SUBMISSION =====
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const subject = this.querySelectorAll('input[type="text"]')[1].value;
+            const message = this.querySelector('textarea').value;
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('.btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Show success message
+                alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon.`);
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Add visual feedback
+                submitBtn.style.background = 'linear-gradient(135deg, var(--accent-gold), var(--accent-red))';
+                submitBtn.style.color = 'var(--primary-dark)';
+                
+                setTimeout(() => {
+                    submitBtn.style.background = '';
+                    submitBtn.style.color = '';
+                }, 2000);
+            }, 1500);
+        });
+
+        // ===== INITIALIZE ANIMATIONS ON LOAD =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial reveal for elements in viewport
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+
+        // ===== PARALLAX EFFECT FOR HERO SECTION =====
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            
+            if (heroBg) {
+                heroBg.style.transform = `scale(1.05) translateY(${scrolled * 0.05}px)`;
+            }
+        });
+
+        // ===== STAGGERED ANIMATION FOR SKILL ITEMS =====
+        const skillItems = document.querySelectorAll('.skill-item');
+        skillItems.forEach((item, index) => {
+            item.style.transitionDelay = `${(index % 4) * 0.1}s`;
+        });
+
+        // ===== TOOL CARDS INTERACTIVE EFFECT =====
+        const toolCards = document.querySelectorAll('.tool-card');
+        toolCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
